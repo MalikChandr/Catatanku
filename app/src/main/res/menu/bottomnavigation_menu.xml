@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/catatan"
+        android:enabled="true"
+        android:title="@string/catatan"
+        android:icon="@drawable/ic_note"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/recorder"
+        android:enabled="true"
+        android:title="@string/rekaman"
+        android:icon="@drawable/ic_record"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/diary"
+        android:enabled="true"
+        android:title="@string/diary"
+        android:icon="@drawable/ic_book"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/account_menu"
+        android:enabled="true"
+        android:title="@string/account"
+        android:icon="@drawable/ic_color"
+        app:showAsAction="ifRoom"/>
+</menu>

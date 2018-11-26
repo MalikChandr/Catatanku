@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Catatanku</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="catatan">Catatanku</string>
+    <string name="rekaman">Rekamanku</string>
+    <string name="diary">Diaryku</string>
+    <string name="account">Account</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+</resources>
