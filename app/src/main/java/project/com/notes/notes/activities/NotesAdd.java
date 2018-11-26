@@ -1,9 +1,12 @@
 package project.com.notes.notes.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -71,25 +74,57 @@ public class NotesAdd extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add){
-            String notesTitle, notesDesc, notesDate;
+            final String notesTitle, notesDesc, notesDate;
 
             notesTitle      = edtTitle.getText().toString();
             notesDesc       = edtDescription.getText().toString();
             notesDate       = getCurrentDate()+" "+getCurrentTime();
 
-            try{
-                Paper.book().write("title", notesTitle);
-                Paper.book().write("content", notesDesc);
+            if(notesTitle.equals("")){
+                Toast.makeText(this, "Judul catatan belum diisi", Toast.LENGTH_SHORT).show();
+            }else if (notesDesc.equals("")){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Catatan masih kosong, lanjutkan menyimpan ?");
+                builder.setPositiveButton("Simpan", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try{
+                            Paper.book().write("title", notesTitle);
+                            Paper.book().write("content", notesDesc);
 
+                            dbAdapter.insertNotesData(notesTitle, notesDesc, notesDate);
+                            Toast.makeText(NotesAdd.this, "Catatan tersimpan", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }catch(Exception e){
+                            Toast.makeText(NotesAdd.this, "Gagagl tersimpan", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                dbAdapter.insertNotesData(notesTitle, notesDesc, notesDate);
-                Toast.makeText(this, "Catatan tersimpan", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }catch(Exception e){
-                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }else{
+                try{
+                    Paper.book().write("title", notesTitle);
+                    Paper.book().write("content", notesDesc);
+
+                    dbAdapter.insertNotesData(notesTitle, notesDesc, notesDate);
+                    Toast.makeText(this, "Catatan tersimpan", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }catch(Exception e){
+                    Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show();
+                }
             }
+
 
 
             return true;
@@ -102,6 +137,7 @@ public class NotesAdd extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         finish();
     }
 }

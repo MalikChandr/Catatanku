@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new NotesList();
                         break;
                     case R.id.recorder :
-                        fragment = new FragmentRecord();
+                        fragment = new RecordList();
                         break;
                     case R.id.diary :
-                        fragment = new FragmentDiary();
+                        fragment = new DiaryList();
                         break;
 
                     case R.id.account_menu :
-                        fragment = new FragmentDrawing();
+                        fragment = new DrawingList();
                         break;
                 }
                 return loadFragment(fragment);

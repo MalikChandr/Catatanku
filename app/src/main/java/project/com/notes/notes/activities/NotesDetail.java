@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import project.com.notes.notes.database.DatabaseAdapter;
 public class NotesDetail extends AppCompatActivity {
 
     EditText edtTitle, edtDescription;
+    TextView edtNameDate, edtDate;
     String title, description, dateCreate, dateUpdate, currentDate, currentTime;
     int id;
     FloatingActionButton fab;
@@ -43,6 +45,8 @@ public class NotesDetail extends AppCompatActivity {
         edtTitle        = findViewById(R.id.edtJudulUpdate);
         edtDescription  = findViewById(R.id.edtContentUpdate);
         fab             = findViewById(R.id.fab);
+        edtDate         = findViewById(R.id.txtDate);
+        edtNameDate     = findViewById(R.id.txtNameDate);
 
         layout          = findViewById(R.id.scroll);
         layout_dtl      = findViewById(R.id.layout_detail);
@@ -55,6 +59,14 @@ public class NotesDetail extends AppCompatActivity {
 
         edtTitle.setText(title);
         edtDescription.setText(description);
+
+        if (dateUpdate.equals("0")){
+            edtNameDate.setText("Dibuat pada : ");
+            edtDate.setText(dateCreate);
+        }else{
+            edtNameDate.setText("Diperbarui pada : ");
+            edtDate.setText(dateUpdate);
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

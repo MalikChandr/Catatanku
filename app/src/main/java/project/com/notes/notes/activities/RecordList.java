@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import project.com.notes.notes.R;
 
-public class FragmentRecord extends Fragment {
+public class RecordList extends Fragment {
 
     Toolbar toolbar;
 
@@ -24,7 +24,7 @@ public class FragmentRecord extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dua, container, false);
+        View view = inflater.inflate(R.layout.record_list, container, false);
 
         toolbar = view.findViewById(R.id.toolbar_dua);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);

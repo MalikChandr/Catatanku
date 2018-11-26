@@ -70,6 +70,7 @@ public class NotesList extends Fragment {
         if (id == R.id.action_addNotes){
             Intent intent = new Intent(getActivity(), NotesAdd.class);
             startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             getActivity().finish();
             return true;
         }
